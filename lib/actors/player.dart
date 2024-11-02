@@ -48,7 +48,7 @@ class Player extends SpriteAnimationGroupComponent
     };
 
     //Set current animation
-    current = PlayerState.running;
+    current = PlayerState.idle;
   }
 
   SpriteAnimation _spriteAnimation(String state, int amount) {

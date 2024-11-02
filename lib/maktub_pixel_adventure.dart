@@ -11,7 +11,7 @@ class MaktubPixelAdventure extends FlameGame {
   late final CameraComponent cam;
 
   @override
-  final world = Level();
+  final world = Level(levelName: 'Level-02');
 
   @override
   FutureOr<void> onLoad() async {
