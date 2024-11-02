@@ -14,6 +14,7 @@ class MaktubPixelAdventure extends FlameGame
   late final CameraComponent cam;
   late JoystickComponent joystick;
   Player player = Player(character: "Mask Dude");
+  bool showJoystick = true;
 
   @override
   FutureOr<void> onLoad() async {
@@ -25,8 +26,19 @@ class MaktubPixelAdventure extends FlameGame
     cam.viewfinder.anchor = Anchor.topLeft;
     cam.priority = 1000;
     addAll([cam, world]);
-    addJoystick();
+
+    if(showJoystick){
+      addJoystick();
+    }
     return super.onLoad();
+  }
+
+  @override
+  void update(double dt) {
+    if (showJoystick) {
+    updateJoystick();
+    }
+    super.update(dt);
   }
 
   void addJoystick() {
@@ -46,5 +58,23 @@ class MaktubPixelAdventure extends FlameGame
 
     joystick.priority = 1001;
     add(joystick);
+  }
+
+  void updateJoystick() {
+    switch (joystick.direction) {
+      case JoystickDirection.upLeft:
+      case JoystickDirection.left:
+      case JoystickDirection.downLeft:
+        player.playerDirection = PlayerDirection.left;
+        break;
+      case JoystickDirection.right:
+      case JoystickDirection.upRight:
+      case JoystickDirection.downRight:
+        player.playerDirection = PlayerDirection.right;
+        break;
+      default:
+        player.playerDirection = PlayerDirection.none;
+        break;
+    }
   }
 }
